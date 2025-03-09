@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# CAD Viewer Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web-based CAD viewer built using React (frontend), Three.js (for 3D rendering), and Flask (backend). It allows users to upload, view, and manipulate 3D models like STL and OBJ files directly in the browser.
 
-## Available Scripts
+## Features
+- Upload 3D model files (STL/OBJ).
+- View and manipulate 3D models in the browser.
+- Basic controls for rotating, zooming, and panning the model.
 
-In the project directory, you can run:
+## Prerequisites
 
-### `npm start`
+Before you start, you’ll need to have the following installed on your machine:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Node.js](https://nodejs.org/) (for the frontend)
+- [Python](https://www.python.org/downloads/) (for the backend)
+- [pip](https://pip.pypa.io/en/stable/) (for Python package management)
+- [Flask](https://flask.palletsprojects.com/en/2.2.x/) (for backend API)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setting Up the Project
 
-### `npm test`
+### 1. Clone the repository
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone this repository to your local machine:
 
-### `npm run build`
+```bash
+git clone https://github.com/arshadshaik0000/cad-viewer.git
+cd cad-viewer
+2. Set up the Backend
+The backend is built using Flask. To set it up:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Navigate to the backend directory:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+bash
+Copy
+Edit
+cd backend
+Create a virtual environment (optional but recommended):
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+bash
+Copy
+Edit
+python -m venv venv
+Activate the virtual environment:
 
-### `npm run eject`
+On Windows:
+bash
+Copy
+Edit
+.\venv\Scripts\activate
+On macOS/Linux:
+bash
+Copy
+Edit
+source venv/bin/activate
+Install the required Python dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+bash
+Copy
+Edit
+pip install -r requirements.txt
+Run the backend server:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+bash
+Copy
+Edit
+python app.py
+The backend server will now be running at http://127.0.0.1:5000.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Set up the Frontend
+The frontend is built using React and Three.js. To set it up:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Navigate to the frontend directory:
 
-## Learn More
+bash
+Copy
+Edit
+cd frontend
+Install the required Node.js dependencies:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+bash
+Copy
+Edit
+npm install
+Run the frontend development server:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+bash
+Copy
+Edit
+npm start
+This will start the frontend server at http://localhost:3000.
 
-### Code Splitting
+4. Accessing the Application
+Once both the frontend and backend are running:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Open your browser and navigate to http://localhost:3000.
+Upload a 3D model file (STL/OBJ).
+You should now be able to view and manipulate the model in the browser.
+Troubleshooting
+If you encounter any issues related to missing dependencies or errors while running the project, make sure to check that all dependencies are installed correctly (pip install -r requirements.txt for the backend and npm install for the frontend).
+If the server is not running correctly, make sure that both the Flask backend and the React frontend are running concurrently.
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-### Analyzing the Bundle Size
+vbnet
+Copy
+Edit
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Changes:
+- **Export functionality section removed**: The export feature (STL to OBJ conversion) is no longer mentioned in the README, as it hasn't been implemented.
+- The rest of the instructions are the same for setting up the project and running it.
 
-### Making a Progressive Web App
+Once you've updated the `README.md`, commit and push the changes:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+git add README.md
+git commit -m "Updated README without export functionality section"
+git push origin main
