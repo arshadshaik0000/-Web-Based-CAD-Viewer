@@ -1,101 +1,101 @@
-# CAD Viewer Project
+🖥️ Web-Based CAD Viewer
 
-This is a web-based CAD viewer built using React (frontend), Three.js (for 3D rendering), and Flask (backend). 
-It allows users to upload, view, and manipulate 3D models like STL and OBJ files directly in the browser.
 
-## Features
-- Upload 3D model files (STL/OBJ).
-- View and manipulate 3D models in the browser.
-- Basic controls for rotating, zooming, and panning the model.
+A web-based 3D CAD model viewer that allows users to upload and visualize STL and OBJ files in an interactive 3D environment using Three.js, React.js, and Flask.
 
-## Prerequisites
 
-Before you start, you’ll need to have the following installed on your machine:
 
-- [Node.js](https://nodejs.org/) (for the frontend)
-- [Python](https://www.python.org/downloads/) (for the backend)
-- [pip](https://pip.pypa.io/en/stable/) (for Python package management)
-- [Flask](https://flask.palletsprojects.com/en/2.2.x/) (for backend API)
+🚀 Demo
+🔗 Watch Demo Video (https://www.loom.com/share/0a11ca8c08ac4a388002ffa5e1554b20?sid=d85368e2-7dfb-4632-ae9e-aedd0439ea77)
 
-## Setting Up the Project
+✨ Features
+✅ 3D Model Upload & Rendering – Users can upload STL/OBJ files, and the viewer dynamically loads them into the scene.
+✅ Interactive Controls – Rotate, zoom, and pan models using OrbitControls from Three.js.
+✅ Auto-Rotate Toggle – Enable or disable automatic model rotation.
+✅ Flask Backend for File Uploads – Models are stored on the server and retrieved dynamically.
+✅ Responsive UI – Works on different screen sizes.
 
-### 1. Clone the repository
+⚙️ Tech Stack
+Frontend: React.js, Three.js
+Backend: Flask, Python
+Styling: CSS
+Deployment: Local development (can be extended to cloud hosting)
 
-Clone this repository to your local machine:
 
-```bash
+
+📂 Project Structure
+
+
+cad-viewer-project/
+│── backend/
+│   ├── app.py  # Flask backend
+│   ├── uploads/  # Uploaded 3D models
+│── frontend/
+│   ├── src/
+│   │   ├── App.js  # React main component
+│   │   ├── App.css  # Styling
+│   │   ├── index.js  # React entry point
+│── package.json  # Dependencies
+│── README.md  # Project Documentation
+
+## 📸 Screenshots  
+Here are some screenshots of the application in action:  
+
+![Screenshot 1](assets/images/1.png)  
+![Screenshot 2](assets/images/2.png)  
+![Screenshot 3](assets/images/3.png)  
+![Screenshot 4](assets/images/4.png)  
+![Screenshot 5](assets/images/5.png)  
+
+
+🚀 Setup & Installation
+1️⃣ Clone the Repository
+bash
+Copy
+Edit
 git clone https://github.com/arshadshaik0000/cad-viewer.git
-cd cad-viewer
-2. Set up the Backend
-The backend is built using Flask. To set it up:
+cd cad-viewer-project
 
-Navigate to the backend directory:
 
+
+2️⃣ Run the Backend (Flask)
 bash
-Copy
-Edit
+
 cd backend
-Create a virtual environment (optional but recommended):
-
-bash
-Copy
-Edit
-python -m venv venv
-Activate the virtual environment:
-
-On Windows:
-bash
-Copy
-Edit
-.\venv\Scripts\activate
-On macOS/Linux:
-bash
-Copy
-Edit
-source venv/bin/activate
-Install the required Python dependencies:
-
-bash
-Copy
-Edit
 pip install -r requirements.txt
-Run the backend server:
-
-bash
-Copy
-Edit
 python app.py
-The backend server will now be running at http://127.0.0.1:5000.
+Backend will start at: http://127.0.0.1:5000/
 
-3. Set up the Frontend
-The frontend is built using React and Three.js. To set it up:
-
-Navigate to the frontend directory:
-
+3️⃣ Run the Frontend (React)
 bash
-Copy
-Edit
+
 cd frontend
-Install the required Node.js dependencies:
-
-bash
-Copy
-Edit
 npm install
-Run the frontend development server:
-
-bash
-Copy
-Edit
 npm start
-This will start the frontend server at http://localhost:3000.
 
-4. Accessing the Application
-Once both the frontend and backend are running:
+Frontend will start at: http://localhost:3000/
 
-Open your browser and navigate to http://localhost:3000.
-Upload a 3D model file (STL/OBJ).
-You should now be able to view and manipulate the model in the browser.
-Troubleshooting
-If you encounter any issues related to missing dependencies or errors while running the project, make sure to check that all dependencies are installed correctly (pip install -r requirements.txt for the backend and npm install for the frontend).
-If the server is not running correctly, make sure that both the Flask backend and the React frontend are running concurrently.
+🛠 API Endpoints
+
+
+Method	Endpoint	Description
+GET	/	Check if the server is running
+POST	/upload	Upload a 3D model file
+GET	/models/:filename	Retrieve an uploaded model
+
+
+📌 How It Works
+1️⃣ Upload a 3D model file (STL/OBJ)
+2️⃣ The backend stores the file in the uploads/ folder
+3️⃣ The frontend fetches the model and renders it in Three.js
+4️⃣ Users can rotate, zoom, and pan the model
+5️⃣ Users can toggle auto-rotation
+
+👨‍💻 Future Improvements
+✅ Support for more 3D file formats (e.g., GLTF, FBX)
+✅ UI Enhancements – Improve responsiveness and design
+✅ Deployment on Cloud – Host the project online
+
+
+📜 License
+This project is open-source under the MIT License.
