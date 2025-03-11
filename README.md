@@ -6,7 +6,7 @@ A web-based 3D CAD model viewer that allows users to upload and visualize STL an
 
 
 🚀 Demo
-🔗 Watch Demo Video (https://www.loom.com/share/0a11ca8c08ac4a388002ffa5e1554b20?sid=d85368e2-7dfb-4632-ae9e-aedd0439ea77)
+🔗 Watch Demo Video https://www.loom.com/share/0a11ca8c08ac4a388002ffa5e1554b20?sid=d85368e2-7dfb-4632-ae9e-aedd0439ea77
 
 ✨ Features
 ✅ 3D Model Upload & Rendering – Users can upload STL/OBJ files, and the viewer dynamically loads them into the scene.\
@@ -25,22 +25,6 @@ Backend: Flask, Python
 Styling: CSS
 Deployment: Local development (can be extended to cloud hosting)
 
-
-
-📂 Project Structure
-
-
-cad-viewer-project/
-│── backend/
-│   ├── app.py  # Flask backend
-│   ├── uploads/  # Uploaded 3D models
-│── frontend/
-│   ├── src/
-│   │   ├── App.js  # React main component
-│   │   ├── App.css  # Styling
-│   │   ├── index.js  # React entry point
-│── package.json  # Dependencies
-│── README.md  # Project Documentation
 
 ## 📸 Screenshots  
 Here are some screenshots of the application in action:  
