@@ -2,95 +2,123 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import "./App.css";
 
 function ModelViewer() {
   const containerRef = useRef(null);
+  const [file, setFile] = useState(null);
+  const [fileUrl, setFileUrl] = useState("");
   const [controls, setControls] = useState(null);
 
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!file) {
+      alert("Please select a file first!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setFileUrl(`http://127.0.0.1:5000/models/${data.filename}`);
+        alert("File uploaded successfully!");
+      } else {
+        alert(`Upload failed: ${data.error}`);
+      }
+    } catch (error) {
+      alert("Error uploading file!");
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
+    if (!fileUrl) return;
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    containerRef.current.innerHTML = "";
     containerRef.current.appendChild(renderer.domElement);
 
-    // Lighting for better visibility
-    const light = new THREE.AmbientLight(0x404040, 2); // Ambient light
-    scene.add(light);
+    const ambientLight = new THREE.AmbientLight(0x404040, 2);
+    scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Directional light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
 
-    // Load the STL model
     const loader = new STLLoader();
-    loader.load("/models/model.stl", (geometry) => {
+    loader.load(fileUrl, (geometry) => {
       const material = new THREE.MeshStandardMaterial({ color: 0xcccccc });
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
 
-      // Calculate the bounding box of the model
       const box = new THREE.Box3().setFromObject(mesh);
       const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
 
-      // Adjust the camera position to fit the model within the viewport
       const maxDim = Math.max(size.x, size.y, size.z);
       const cameraDistance = maxDim / (2 * Math.tan(Math.PI * camera.fov / 360));
-      camera.position.set(center.x, center.y, cameraDistance);
-      camera.lookAt(center); // Ensure the camera is pointing to the center of the model
+      camera.position.set(center.x, center.y, cameraDistance + 2);
+      camera.lookAt(center);
 
-      // Optional: You can set the initial rotation if needed
-      mesh.rotation.x = -Math.PI / 2; // Rotate to fit the view (if needed)
+      mesh.rotation.x = -Math.PI / 2;
     });
 
-    // Set up OrbitControls
     const orbitControls = new OrbitControls(camera, renderer.domElement);
-    orbitControls.enableDamping = true; // Smooth controls
-    orbitControls.dampingFactor = 0.25; // Damping effect
-    orbitControls.screenSpacePanning = false; // Disables panning in screen space
+    orbitControls.enableDamping = true;
+    orbitControls.dampingFactor = 0.25;
+    orbitControls.screenSpacePanning = false;
+    setControls(orbitControls);
 
-    setControls(orbitControls); // Store the controls in state
-
-    // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
-
-      // Update controls (for damping and smoothness)
-      if (orbitControls) {
-        orbitControls.update();
-      }
-
+      orbitControls.update();
       renderer.render(scene, camera);
     };
     animate();
 
-    // Handle window resizing
-    window.addEventListener("resize", () => {
+    const handleResize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-    });
+    };
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", () => {});
-      orbitControls.dispose(); // Dispose of controls on cleanup
+      window.removeEventListener("resize", handleResize);
+      orbitControls.dispose();
     };
-  }, []);
+  }, [fileUrl]);
 
   const rotateModel = () => {
     if (controls) {
-      // Enable or disable auto-rotation
-      controls.autoRotate = !controls.autoRotate; // Toggle auto-rotation
+      controls.autoRotate = !controls.autoRotate;
     }
   };
 
   return (
-    <div>
-      <div ref={containerRef} />
-      <div style={{ position: "absolute", top: 10, left: 10, zIndex: 1 }}>
-        <button onClick={rotateModel}>Toggle Auto-Rotation</button>
+    <div className="app-container">
+      <h1 className="title">Web-Based CAD Viewer</h1>
+      <div className="upload-section">
+        <input type="file" accept=".stl, .obj" onChange={handleFileChange} className="file-input" />
+        <button onClick={handleUpload} className="custom-button">Upload & View</button>
+        <button onClick={rotateModel} className="custom-button">Toggle Auto-Rotation</button>
       </div>
+      <div ref={containerRef} className="viewer-container" />
     </div>
   );
 }

@@ -3,7 +3,7 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # Allow cross-origin requests
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -24,6 +24,7 @@ def upload_file():
     
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file.save(filepath)
+    
     return jsonify({"message": "File uploaded successfully", "filename": file.filename}), 200
 
 @app.route("/models/<filename>", methods=["GET"])
