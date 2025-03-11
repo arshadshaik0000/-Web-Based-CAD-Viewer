@@ -9,10 +9,14 @@ A web-based 3D CAD model viewer that allows users to upload and visualize STL an
 🔗 Watch Demo Video (https://www.loom.com/share/0a11ca8c08ac4a388002ffa5e1554b20?sid=d85368e2-7dfb-4632-ae9e-aedd0439ea77)
 
 ✨ Features
-✅ 3D Model Upload & Rendering – Users can upload STL/OBJ files, and the viewer dynamically loads them into the scene.
+✅ 3D Model Upload & Rendering – Users can upload STL/OBJ files, and the viewer dynamically loads them into the scene.\
+
 ✅ Interactive Controls – Rotate, zoom, and pan models using OrbitControls from Three.js.
+
 ✅ Auto-Rotate Toggle – Enable or disable automatic model rotation.
+
 ✅ Flask Backend for File Uploads – Models are stored on the server and retrieved dynamically.
+
 ✅ Responsive UI – Works on different screen sizes.
 
 ⚙️ Tech Stack
